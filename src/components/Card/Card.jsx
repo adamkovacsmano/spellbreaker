@@ -7,13 +7,10 @@ class Card extends Component {
   render() {
     return (
       <div className={styles.cardContainer}>
-        <h1>Liam the Barbarian</h1>
+        <h1>Liam {this.props.name}</h1>
         <img src={barbarian} alt="barbarian"></img>
         <section>
-          <p>
-            ..remember throughout your journeys... the barbarians have the most
-            amount of vitality, but they lack in willpower
-          </p>
+          <p>{this.props.description}</p>
         </section>
         <section className={styles.attributes}>
           <table>
