@@ -1,3 +1,24 @@
 .app {
-  text-align: center;
+  background-image: url(../../Images/city.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.title{
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left:50%;
+    transform: translate(-50%);
+    color: rgb(255, 60, 60);
+    font-size: 3em;
+}
+
+.cardSection{
+   display: flex;
+   align-items: flex-end;
+   position: absolute;
+   top: 35%;
 }

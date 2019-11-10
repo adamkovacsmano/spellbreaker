@@ -15,9 +15,7 @@ class App extends Component {
       .then(querySnapshot => {
         const cards = querySnapshot.docs.map(doc => {
           return { ...doc.data(), docId: doc.id };
-          //spread operator
         });
-        // console.log(cards);
         this.setState({
           cards: cards
         });
@@ -27,13 +25,21 @@ class App extends Component {
   render() {
     return (
       <div className={styles.app}>
+        <h1 className={styles.title}>Spellbreaker</h1>
+       <div className={styles.cardSection}>
         {this.state.cards.map((cards, index) => (
           <Card
             description={cards.description}
             name={cards.name}
+            combatexp={cards.combatexp}
+            luck={cards.luck}
+            hp={cards.hp}
+            willpower={cards.willpower}
+            img={cards.img}
             key={index}
           ></Card>
         ))}
+        </div>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./Card.module.scss";
-import barbarian from "../../Images/barbarian.jpg";
 
 class Card extends Component {
   state = {};
@@ -8,7 +7,7 @@ class Card extends Component {
     return (
       <div className={styles.cardContainer}>
         <h1>Liam {this.props.name}</h1>
-        <img src={barbarian} alt="barbarian"></img>
+        <img src={this.props.img} alt="character-pic"></img>
         <section>
           <p>{this.props.description}</p>
         </section>
@@ -16,22 +15,22 @@ class Card extends Component {
           <table>
             <tr>
               <th>Combat expertise</th>
-              <td>6</td>
+              <td>{this.props.combatexp}</td>
             </tr>
             <tr>
               <th>Willpower</th>
-              <td>6</td>
+              <td>{this.props.willpower}</td>
             </tr>
             <tr>
               <th>Luck</th>
-              <td>6</td>
+              <td>{this.props.luck}</td>
             </tr>
           </table>
         </section>
         <section>
           <tr className={styles.hp}>
             <tr>HP:</tr>
-            <td>14</td>
+            <td>{this.props.hp}</td>
           </tr>
         </section>
       </div>
