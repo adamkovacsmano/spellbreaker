@@ -1,0 +1,56 @@
+.monsterContainer {
+  width: 350px;
+  border: 4px solid black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  background-image: url(../../Images/cardbackground.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  h1 {
+    font-size: 1.5em;
+    color: rgb(255, 60, 60);
+  }
+
+  p {
+    border: 1px solid white;
+    padding: 5px;
+    color: white;
+  }
+
+  img {
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+    object-fit: cover;
+  }
+
+  table {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+.attributes {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border: 1px solid white;
+
+  div{
+    display: flex;
+  }
+
+  tr {
+    padding-right: 5px;
+  }
+
+  td {
+    color: rgb(255, 60, 60);
+  }
+}
