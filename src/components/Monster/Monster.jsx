@@ -6,13 +6,11 @@ class Monster extends Component{
 
   render(){
     return(
-      <div className={styles.monsterContainer}>
+      <div className={styles.monsterContainer} style={{cursor: "pointer"}}>
         <h1>{this.props.name}</h1>
         <img src={this.props.img} alt="monster-pic"></img>
-        <section>
+        <section className={styles.content}>
           <p>{this.props.description}</p>
-        </section>
-        <section>
           <tr className={styles.attributes}>
             <div>
               <tr>Combat expertise:</tr>

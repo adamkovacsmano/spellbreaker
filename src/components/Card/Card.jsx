@@ -5,8 +5,8 @@ class Card extends Component {
   state = {};
   render() {
     return (
-      <div className={styles.cardContainer}>
-        <h1>Liam {this.props.name}</h1>
+      <div className={styles.cardContainer} style={{cursor: "pointer"}}>
+        <h1>{this.props.playername} {this.props.name}</h1>
         <img src={this.props.img} alt="character-pic"></img>
         <section>
           <p>{this.props.description}</p>
