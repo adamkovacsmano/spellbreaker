@@ -3,11 +3,14 @@ import Card from "../../components/Card";
 import styles from "./GameBoard.module.scss";
 import { firestore } from "../../firebase";
 import Monster from "../../components/Monster";
+import NameInput from "../../components/NameInput";
 
 class GameBoard extends Component {
   state = {
     cards: [],
-    monsters:[]
+    monsters:[],
+    value: "",
+    palyername: ""
   };
 
   componentDidMount() {
@@ -34,16 +37,37 @@ class GameBoard extends Component {
           monsters: monsters
         });
         
-      });  
+      });
+    document.addEventListener("keydown", this.enterName, false);  
+  }
+
+  
+  onTextInput = event => {
+    let value = event.target.value;
+    this.setState({value});
+    console.log(this.state.value);
+  }
+  
+  enterName = (event) => {
+  if (event.keyCode === 13){
+      console.log("event:", this.state.value);
+      this.setState({playername: this.state.value});
+      console.log(this.state.playername);
+    };
   }
 
   render() {
     return (
       <div className={styles.board}>
-        <h1 className={styles.title}>Spellbreaker</h1>
+        <section className={styles.title}>
+          <h1>Spellbreaker</h1>
+          <p>enter your name traveller..</p>
+          <NameInput onChange={this.onTextInput}></NameInput>
+        </section>
        <div className={styles.cardSection}>
         {this.state.cards.map((cards, index) => (
           <Card
+            playername={this.state.playername}
             description={cards.description}
             name={cards.name}
             combatexp={cards.combatexp}
