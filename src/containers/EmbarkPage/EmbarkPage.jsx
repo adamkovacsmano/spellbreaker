@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import Card from "../../components/Card";
 import styles from "./EmbarkPage.module.scss";
 import { firestore } from "../../firebase";
-import Monster from "../../components/Monster";
 import NameInput from "../../components/NameInput";
 import Button from "../../components/Button";
 
 class EmbarkPage extends Component {
   state = {
     cards: [],
-    monsters: [],
     value: "",
     playername: "",
     selectedCard: ""
@@ -27,17 +25,7 @@ class EmbarkPage extends Component {
           cards: cards
         });
       });
-    firestore
-      .collection("monsters")
-      .get()
-      .then(querySnapshot => {
-        const monsters = querySnapshot.docs.map(doc => {
-          return { ...doc.data(), docId: doc.id };
-        });
-        this.setState({
-          monsters: monsters
-        });
-      });
+    
     document.addEventListener("keydown", this.enterName, false);
   }
 
@@ -64,6 +52,7 @@ class EmbarkPage extends Component {
   };
 
   render() {
+    console.log(this.state.cards[0])
     return (
       <div className={styles.board}>
         <section className={styles.title}>
@@ -79,7 +68,7 @@ class EmbarkPage extends Component {
             <Card
               selectChar={this.selectChar}
               isSelected={this.state.selectedCard === card.name}
-              playername={this.state.playername}
+              value={this.state.value}
               description={card.description}
               name={card.name}
               combatexp={card.combatexp}
@@ -89,18 +78,6 @@ class EmbarkPage extends Component {
               img={card.img}
               key={index}
             ></Card>
-          ))}
-        </div>
-        <div className={styles.monsterSection}>
-          {this.state.monsters.map((monsters, index) => (
-            <Monster
-              description={monsters.description}
-              name={monsters.name}
-              combatexp={monsters.combatexp}
-              hp={monsters.hp}
-              img={monsters.img}
-              key={index}
-            ></Monster>
           ))}
         </div>
       </div>

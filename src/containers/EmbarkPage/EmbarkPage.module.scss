@@ -24,15 +24,9 @@
 
 .cardSection {
   display: flex;
-  align-items: flex-end;
-  position: absolute;
+  justify-content: space-evenly;
+  position: relative;
   top: 35%;
 }
 
-.monsterSection {
-  display: flex;
-  align-items: flex-end;
-  position: absolute;
-  top: 35%;
-  left: 80%;
-}
+
