@@ -1,16 +1,18 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Card from "../../components/Card";
 import styles from "./GameBoard.module.scss";
 import { firestore } from "../../firebase";
 import Monster from "../../components/Monster";
 import NameInput from "../../components/NameInput";
+import Button from "../../components/Button";
 
 class GameBoard extends Component {
   state = {
     cards: [],
-    monsters:[],
+    monsters: [],
     value: "",
-    palyername: ""
+    palyername: "",
+    selectedCard: ""
   };
 
   componentDidMount() {
@@ -24,7 +26,6 @@ class GameBoard extends Component {
         this.setState({
           cards: cards
         });
-        
       });
     firestore
       .collection("monsters")
@@ -36,25 +37,27 @@ class GameBoard extends Component {
         this.setState({
           monsters: monsters
         });
-        
       });
-    document.addEventListener("keydown", this.enterName, false);  
+    document.addEventListener("keydown", this.enterName, false);
   }
 
-  
   onTextInput = event => {
     let value = event.target.value;
-    this.setState({value});
-    console.log(this.state.value);
-  }
-  
-  enterName = (event) => {
-  if (event.keyCode === 13){
-      console.log("event:", this.state.value);
-      this.setState({playername: this.state.value});
-      console.log(this.state.playername);
-    };
-  }
+    this.setState({ value });
+  };
+
+  enterName = event => {
+    if (event.keyCode === 13) {
+      this.setState({ playername: this.state.value });
+    }
+  };
+
+  selectChar = name => {
+    this.setState({ selectedCard: name });
+    // if (this.state.selectedCard === this.state.cards.name) {
+    //   this.setState({ selectedCard: "" });
+    // }
+  };
 
   render() {
     return (
@@ -63,36 +66,41 @@ class GameBoard extends Component {
           <h1>Spellbreaker</h1>
           <p>enter your name traveller..</p>
           <NameInput onChange={this.onTextInput}></NameInput>
+          <div>
+            <Button name={"Embark"}></Button>
+          </div>
         </section>
-       <div className={styles.cardSection}>
-        {this.state.cards.map((cards, index) => (
-          <Card
-            playername={this.state.playername}
-            description={cards.description}
-            name={cards.name}
-            combatexp={cards.combatexp}
-            luck={cards.luck}
-            hp={cards.hp}
-            willpower={cards.willpower}
-            img={cards.img}
-            key={index}
-          ></Card>
-        ))}
+        <div className={styles.cardSection}>
+          {this.state.cards.map((card, index) => (
+            <Card
+              selectChar={this.selectChar}
+              isSelected={this.state.selectedCard === card.name}
+              playername={this.state.playername}
+              description={card.description}
+              name={card.name}
+              combatexp={card.combatexp}
+              luck={card.luck}
+              hp={card.hp}
+              willpower={card.willpower}
+              img={card.img}
+              key={index}
+            ></Card>
+          ))}
+        </div>
+        <div className={styles.monsterSection}>
+          {this.state.monsters.map((monsters, index) => (
+            <Monster
+              description={monsters.description}
+              name={monsters.name}
+              combatexp={monsters.combatexp}
+              hp={monsters.hp}
+              img={monsters.img}
+              key={index}
+            ></Monster>
+          ))}
+        </div>
       </div>
-      <div className={styles.monsterSection}>
-        {this.state.monsters.map((monsters, index) => (
-          <Monster
-          description={monsters.description}
-          name={monsters.name}
-          combatexp={monsters.combatexp}
-          hp={monsters.hp}
-          img={monsters.img}
-          key={index}
-          ></Monster>
-        ))}
-      </div>
-    </div>
-   );
+    );
   }
 }
 
