@@ -3,7 +3,9 @@ import styles from "./Card.module.scss";
 
 class Card extends Component {
   handleClick = () => {
-    this.props.selectChar(this.props.name);
+    if(this.props.selectChar){
+      this.props.selectChar(this.props.name);
+    }
   };
   render() {
     const selectedStyle = this.props.isSelected ? styles.selected : "";
@@ -14,7 +16,7 @@ class Card extends Component {
         onClick={this.handleClick}
       >
         <h1>
-          {this.props.playername} {this.props.name}
+          {this.props.value} {this.props.name}
         </h1>
         <img src={this.props.img} alt="character-pic"></img>
         <section>
