@@ -1,14 +1,14 @@
 import React from "react";
 import { shallow } from "enzyme";
-import GameBoard from "./GameBoard";
+import EmbarkPage from "./EmbarkPage";
 
 describe("CreatePost tests", () => {
-  let card;
+  let embarkpage;
   beforeEach(() => {
-    gameboard = shallow(<GameBoard />);
+    embarkpage = shallow(<EmbarkPage />);
   });
 
   test("should match the snapshot", () => {
-    expect(gameboard).toMatchSnapshot();
+    expect(embarkpage).toMatchSnapshot();
   });
 });
