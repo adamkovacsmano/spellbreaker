@@ -3,7 +3,7 @@ import styles from "./Card.module.scss";
 
 class Card extends Component {
   handleClick = () => {
-    if(this.props.selectChar){
+    if (this.props.selectChar) {
       this.props.selectChar(this.props.name);
     }
   };

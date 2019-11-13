@@ -25,7 +25,7 @@ class EmbarkPage extends Component {
           cards: cards
         });
       });
-    
+
     document.addEventListener("keydown", this.enterName, false);
   }
 
@@ -42,17 +42,20 @@ class EmbarkPage extends Component {
 
   handleEmbarkClick = () => {
     // this.setState({
-    //   playername: this.state.value, 
+    //   playername: this.state.value,
     //   cards: this.state.cards.filter(card => this.state.selectedCard === card.name)
-    this.props.onComplete(this.state.value, this.state.cards.filter(card => this.state.selectedCard === card.name)[0]);
-  }
+    this.props.onComplete(
+      this.state.value,
+      this.state.cards.filter(card => this.state.selectedCard === card.name)[0]
+    );
+  };
 
   selectChar = name => {
     this.setState({ selectedCard: name });
   };
 
   render() {
-    console.log(this.state.cards[0])
+    console.log(this.state.cards[0]);
     return (
       <div className={styles.board}>
         <section className={styles.title}>
@@ -60,7 +63,13 @@ class EmbarkPage extends Component {
           <p>enter your name and choose a character</p>
           <NameInput onChange={this.onTextInput}></NameInput>
           <div>
-            <Button disabled={this.state.value === "" || this.state.selectedCard === ""} onClick={this.handleEmbarkClick} name={"Embark"}></Button>
+            <Button
+              disabled={
+                this.state.value === "" || this.state.selectedCard === ""
+              }
+              onClick={this.handleEmbarkClick}
+              name={"Embark"}
+            ></Button>
           </div>
         </section>
         <div className={styles.cardSection}>
