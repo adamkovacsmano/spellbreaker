@@ -2,11 +2,25 @@ import React, { Component } from "react";
 import styles from "./Card.module.scss";
 
 class Card extends Component {
-  state = {};
+  state = {
+    isSelected: this.props.isSelected
+  };
+
+  handleClick = () => {
+    this.setState({ isSelected: !this.state.isSelected });
+    // this.props.deselect(this.state.isSelected);
+  };
   render() {
+    const selectedStyle = this.state.isSelected ? styles.selected : "";
     return (
-      <div className={styles.cardContainer} style={{cursor: "pointer"}}>
-        <h1>{this.props.playername} {this.props.name}</h1>
+      <div
+        className={`${styles.cardContainer} ${selectedStyle}`}
+        style={{ cursor: "pointer" }}
+        onClick={this.handleClick}
+      >
+        <h1>
+          {this.props.playername} {this.props.name}
+        </h1>
         <img src={this.props.img} alt="character-pic"></img>
         <section>
           <p>{this.props.description}</p>
