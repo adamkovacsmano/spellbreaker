@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import styles from "./Monster.module.scss";
 
 class Monster extends Component {
-  state = {};
-
   render() {
     return (
-      <div className={styles.monsterContainer} style={{ cursor: "pointer" }}>
+      <div className={styles.monsterContainer}>
         <h1>{this.props.name}</h1>
         <img src={this.props.img} alt="monster-pic"></img>
         <section>

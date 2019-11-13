@@ -2,16 +2,11 @@ import React, { Component } from "react";
 import styles from "./Card.module.scss";
 
 class Card extends Component {
-  state = {
-    isSelected: this.props.isSelected
-  };
-
   handleClick = () => {
-    this.setState({ isSelected: !this.state.isSelected });
-    // this.props.deselect(this.state.isSelected);
+    this.props.selectChar(this.props.name);
   };
   render() {
-    const selectedStyle = this.state.isSelected ? styles.selected : "";
+    const selectedStyle = this.props.isSelected ? styles.selected : "";
     return (
       <div
         className={`${styles.cardContainer} ${selectedStyle}`}

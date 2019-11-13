@@ -12,7 +12,7 @@ class GameBoard extends Component {
     monsters: [],
     value: "",
     palyername: "",
-    isSelected: false
+    selectedCard: ""
   };
 
   componentDidMount() {
@@ -52,11 +52,12 @@ class GameBoard extends Component {
     }
   };
 
-  // deSelect = event => {
-  //   // this.state.cards.map((cards, index) => console.log(isSelected, cards));
-  //   // console.log(isSelected);
-  //   console.log(event);
-  // };
+  selectChar = name => {
+    this.setState({ selectedCard: name });
+    // if (this.state.selectedCard === this.state.cards.name) {
+    //   this.setState({ selectedCard: "" });
+    // }
+  };
 
   render() {
     return (
@@ -70,16 +71,18 @@ class GameBoard extends Component {
           </div>
         </section>
         <div className={styles.cardSection}>
-          {this.state.cards.map((cards, index) => (
+          {this.state.cards.map((card, index) => (
             <Card
+              selectChar={this.selectChar}
+              isSelected={this.state.selectedCard === card.name}
               playername={this.state.playername}
-              description={cards.description}
-              name={cards.name}
-              combatexp={cards.combatexp}
-              luck={cards.luck}
-              hp={cards.hp}
-              willpower={cards.willpower}
-              img={cards.img}
+              description={card.description}
+              name={card.name}
+              combatexp={card.combatexp}
+              luck={card.luck}
+              hp={card.hp}
+              willpower={card.willpower}
+              img={card.img}
               key={index}
             ></Card>
           ))}
