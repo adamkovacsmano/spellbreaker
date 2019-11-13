@@ -10,3 +10,16 @@ button {
   margin: 10px;
   font-family: "Fondamento", cursive;
 }
+
+button:disabled{
+  background-color: rgba(177, 165, 165, 0.6);
+  border: 1px solid black;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  font-family: "Fondamento", cursive;
+}

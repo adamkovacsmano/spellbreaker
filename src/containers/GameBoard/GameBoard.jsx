@@ -11,7 +11,7 @@ class GameBoard extends Component {
     cards: [],
     monsters: [],
     value: "",
-    palyername: "",
+    playername: "",
     selectedCard: ""
   };
 
@@ -52,11 +52,15 @@ class GameBoard extends Component {
     }
   };
 
+  handleEmbarkClick = event => {
+    this.setState({
+      playername: this.state.value, 
+      cards: this.state.cards.filter(card => this.state.selectedCard === card.name) 
+    });
+  }
+
   selectChar = name => {
     this.setState({ selectedCard: name });
-    // if (this.state.selectedCard === this.state.cards.name) {
-    //   this.setState({ selectedCard: "" });
-    // }
   };
 
   render() {
@@ -64,10 +68,10 @@ class GameBoard extends Component {
       <div className={styles.board}>
         <section className={styles.title}>
           <h1>Spellbreaker</h1>
-          <p>enter your name traveller..</p>
+          <p>enter your name and choose a character</p>
           <NameInput onChange={this.onTextInput}></NameInput>
           <div>
-            <Button name={"Embark"}></Button>
+            <Button disabled={this.state.value === "" || this.state.selectedCard === ""} onClick={this.handleEmbarkClick} name={"Embark"}></Button>
           </div>
         </section>
         <div className={styles.cardSection}>
