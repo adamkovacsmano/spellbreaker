@@ -7,7 +7,9 @@ import Button from "../../components/Button";
 
 class GameBoard extends Component {
   state = {
-    monsters: []
+    monsters: [],
+    playerhp: this.props.card.hp,
+    monsterhp: "" // working on it
   };
 
   componentDidMount() {
@@ -23,6 +25,16 @@ class GameBoard extends Component {
         });
       });
   }
+
+  attackCycle = () => {
+    console.log(this.state.playerhp);
+    let hp = this.state.monsters[0].hp;
+    hp -= 2;
+    this.setState({
+      monsterhp: hp
+    });
+    console.log(this.state.monsterhp); //thinking hard :D
+  };
 
   render() {
     return (
@@ -41,9 +53,10 @@ class GameBoard extends Component {
             img={this.props.card.img}
             key={this.props.index}
           ></Card>
-
-          {/* <Button name={"Attack"}></Button>
-          <Button name={"Run.."}></Button> */}
+          <section className={styles.combatHandlers}>
+            <Button onClick={this.attackCycle} name={"Attack"}></Button>
+            <Button name={"Run.."}></Button>
+          </section>
         </div>
 
         <div className={styles.monsterSection}>
@@ -52,12 +65,16 @@ class GameBoard extends Component {
               description={monsters.description}
               name={monsters.name}
               combatexp={monsters.combatexp}
-              hp={monsters.hp}
+              hp={(monsters.hp -= this.state.monsterhp)} //will figure it out
               img={monsters.img}
               key={index}
             ></Monster>
           ))}
         </div>
+        <section className={styles.directions}>
+          <Button disabled={true} name={"Proceed inside"}></Button>
+          <Button disabled={true} name={"Check the backyard"}></Button>
+        </section>
       </div>
     );
   }
