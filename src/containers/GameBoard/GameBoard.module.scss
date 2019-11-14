@@ -21,3 +21,13 @@
   top: 2%;
   left: 1%;
 }
+
+.combatHandlers {
+  display: flex;
+  flex-direction: column;
+}
+
+.directions {
+  position: absolute;
+  top: 90%;
+}

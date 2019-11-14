@@ -1,9 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreatePost tests should match the snapshot 1`] = `
-<div>
+<div
+  className="cardContainer "
+  onClick={[Function]}
+  style={
+    Object {
+      "cursor": "pointer",
+    }
+  }
+>
   <h1>
-    Barbarian
+     
   </h1>
+  <img
+    alt="character-pic"
+  />
+  <section>
+    <p />
+  </section>
+  <section
+    className="attributes"
+  >
+    <table>
+      <tr>
+        <th>
+          Combat expertise
+        </th>
+        <td />
+      </tr>
+      <tr>
+        <th>
+          Willpower
+        </th>
+        <td />
+      </tr>
+      <tr>
+        <th>
+          Luck
+        </th>
+        <td />
+      </tr>
+    </table>
+  </section>
+  <section>
+    <tr
+      className="hp"
+    >
+      <tr>
+        HP:
+      </tr>
+      <td />
+    </tr>
+  </section>
 </div>
 `;
