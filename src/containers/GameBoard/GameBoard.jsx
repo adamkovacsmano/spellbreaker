@@ -6,7 +6,6 @@ import Card from "../../components/Card";
 import Button from "../../components/Button";
 
 class GameBoard extends Component {
-
   state = {
     monsters: []
   };
@@ -27,7 +26,7 @@ class GameBoard extends Component {
 
   render() {
     return (
-      <>
+      <div className={styles.gameBoard}>
         <div className={styles.cardSection}>
           <Card
             selectChar={null}
@@ -59,8 +58,7 @@ class GameBoard extends Component {
             ></Monster>
           ))}
         </div>
-
-      </>
+      </div>
     );
   }
 }
