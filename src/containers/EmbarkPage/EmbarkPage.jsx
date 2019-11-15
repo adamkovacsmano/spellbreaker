@@ -33,9 +33,6 @@ class EmbarkPage extends Component {
   };
 
   handleEmbarkClick = () => {
-    // this.setState({
-    //   playername: this.state.value,
-    //   cards: this.state.cards.filter(card => this.state.selectedCard === card.name)
     this.props.onComplete(
       this.state.value,
       this.state.cards.filter(card => this.state.selectedCard === card.name)[0]

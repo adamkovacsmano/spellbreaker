@@ -9,7 +9,8 @@ class GameBoard extends Component {
   state = {
     monsters: [],
     playerhp: this.props.card.hp,
-    monsterhp: "" // working on it
+    monstershp: [],
+    rathp: ""
   };
 
   componentDidMount() {
@@ -21,19 +22,16 @@ class GameBoard extends Component {
           return { ...doc.data(), docId: doc.id };
         });
         this.setState({
-          monsters: monsters
+          monsters: monsters,
+          monstershp: [...monsters.map(monster => monster.hp)]
         });
       });
   }
 
   attackCycle = () => {
-    console.log(this.state.playerhp);
-    let hp = this.state.monsters[0].hp;
-    hp -= 2;
-    this.setState({
-      monsterhp: hp
-    });
-    console.log(this.state.monsterhp); //thinking hard :D
+    this.setState({ rathp: this.state.monstershp[0] });
+    // this.playerAttack();
+    // this.monsterAttack();
   };
 
   render() {
@@ -65,7 +63,7 @@ class GameBoard extends Component {
               description={monsters.description}
               name={monsters.name}
               combatexp={monsters.combatexp}
-              hp={(monsters.hp -= this.state.monsterhp)} //will figure it out
+              hp={monsters.hp}
               img={monsters.img}
               key={index}
             ></Monster>
