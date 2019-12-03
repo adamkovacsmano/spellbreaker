@@ -5,20 +5,20 @@ import GameBoard from "../GameBoard";
 class App extends Component {
   // inserting dummy data lets you render GameBoard straight-up for styling and stuff
   state = {
-    name: "Dannyboi",
+    name: "",
     card: {
-      selectChar: null,
-      isSelected: false,
-      value: "asas",
-      description:
-        "..remember throughout your journeys... the barbarians have the most             amount of vitality, but they lack in willpower",
-      name: "the Barbarian",
-      combatexp: 6,
-      luck: 6,
-      hp: 14,
-      willpower: 6,
-      img:
-        "https://www.geek.com/wp-content/uploads/2017/04/female-barbarians-650x366.jpg"
+      // selectChar: null,
+      // isSelected: false,
+      // value: "asas",
+      // description:
+      //   "..remember throughout your journeys... the barbarians have the most             amount of vitality, but they lack in willpower",
+      // name: "the Barbarian",
+      // combatexp: 6,
+      // luck: 6,
+      // hp: 14,
+      // willpower: 6,
+      // img:
+      //   "https://www.geek.com/wp-content/uploads/2017/04/female-barbarians-650x366.jpg"
     }
   };
 
