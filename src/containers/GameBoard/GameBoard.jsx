@@ -9,7 +9,8 @@ class GameBoard extends Component {
   state = {
     locations: [],
     playerHp: this.props.card.hp,
-    monsterHp: 0
+    monsterHp: 0,
+    currentLocation: null
   };
 
   componentDidMount() {
@@ -27,7 +28,6 @@ class GameBoard extends Component {
         this.setState({
           monsterHp: this.getCurrentLocation().monsterHp
         });
-        console.log(locations);
       });
   }
 
@@ -40,10 +40,8 @@ class GameBoard extends Component {
   };
 
   renderMonster = () => {
-    console.log("renderMonster start");
     const currentLocation = this.getCurrentLocation();
     if (currentLocation != null && currentLocation.monsterName !== "") {
-      console.log(currentLocation);
       return (
         <div className={styles.monsterSection}>
           <Monster
@@ -56,7 +54,6 @@ class GameBoard extends Component {
         </div>
       );
     }
-    console.log("renderMonster no mons");
   };
 
   attackCycle = () => {
@@ -79,8 +76,15 @@ class GameBoard extends Component {
   };
 
   render() {
+    const currentLocation = this.getCurrentLocation();
+    const bg = {
+      backgroundImage: `url(${
+        currentLocation ? currentLocation.background : ""
+      })`
+    };
+
     return (
-      <div className={styles.gameBoard}>
+      <div className={styles.gameBoard} style={bg}>
         <div className={styles.cardSection}>
           <Card
             selectChar={null}
@@ -101,14 +105,23 @@ class GameBoard extends Component {
               name={"Attack"}
               disabled={this.state.monsterHp <= 0}
             ></Button>
-            <Button name={"Run.."}></Button>
+            <Button
+              name={"Run.."}
+              disabled={this.state.monsterHp <= 0}
+            ></Button>
           </section>
         </div>
 
         {this.renderMonster()}
         <section className={styles.directions}>
-          <Button disabled={true} name={"Proceed inside"}></Button>
-          <Button disabled={true} name={"Check the backyard"}></Button>
+          <Button
+            disabled={this.state.monsterHp > 0}
+            name={"Proceed inside"}
+          ></Button>
+          <Button
+            disabled={this.state.monsterHp > 0}
+            name={"Check the backyard"}
+          ></Button>
         </section>
       </div>
     );
