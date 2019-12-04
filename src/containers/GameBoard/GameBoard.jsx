@@ -7,7 +7,9 @@ import Button from "../../components/Button";
 
 class GameBoard extends Component {
   state = {
-    locations: []
+    locations: [],
+    playerHp: this.props.card.hp,
+    monsterHp: 0
   };
 
   componentDidMount() {
@@ -21,6 +23,9 @@ class GameBoard extends Component {
         this.setState({
           locations: locations,
           currentLocation: "chapel"
+        });
+        this.setState({
+          monsterHp: this.getCurrentLocation().monsterHp
         });
         console.log(locations);
       });
@@ -45,13 +50,32 @@ class GameBoard extends Component {
             description={currentLocation.monsterDescription}
             name={currentLocation.monsterName}
             combatexp={currentLocation.monsterCombatexp}
-            hp={currentLocation.monsterHp}
+            hp={this.state.monsterHp}
             img={currentLocation.monsterImg}
           ></Monster>
         </div>
       );
     }
     console.log("renderMonster no mons");
+  };
+
+  attackCycle = () => {
+    const playerChance =
+      this.props.card.combatexp + Math.floor(Math.random() * 11 + 2);
+    const monsterChance =
+      this.getCurrentLocation().monsterCombatexp +
+      Math.floor(Math.random() * 11 + 2);
+    console.log(playerChance, monsterChance);
+
+    if (playerChance > monsterChance) {
+      this.setState({ monsterHp: this.state.monsterHp - 2 });
+    } else if (playerChance < monsterChance) {
+      this.setState({ playerHp: this.state.playerHp - 2 });
+    }
+
+    if (this.state.playerHp <= 0) {
+      alert("you are dead");
+    }
   };
 
   render() {
@@ -66,13 +90,17 @@ class GameBoard extends Component {
             name={this.props.card.name}
             combatexp={this.props.card.combatexp}
             luck={this.props.card.luck}
-            hp={this.props.card.hp}
+            hp={this.state.playerHp}
             willpower={this.props.card.willpower}
             img={this.props.card.img}
             key={this.props.index}
           ></Card>
           <section className={styles.combatHandlers}>
-            <Button onClick={this.attackCycle} name={"Attack"}></Button>
+            <Button
+              onClick={this.attackCycle}
+              name={"Attack"}
+              disabled={this.state.monsterHp <= 0}
+            ></Button>
             <Button name={"Run.."}></Button>
           </section>
         </div>
