@@ -7,23 +7,52 @@ import Button from "../../components/Button";
 
 class GameBoard extends Component {
   state = {
-    monsters: [],
-    monster: ""
+    locations: []
   };
 
   componentDidMount() {
     firestore
-      .collection("monsters")
+      .collection("locations")
       .get()
       .then(querySnapshot => {
-        const monstersFromDatabase = querySnapshot.docs.map(doc => {
+        const locations = querySnapshot.docs.map(doc => {
           return { ...doc.data(), docId: doc.id };
         });
         this.setState({
-          monsters: monstersFromDatabase
+          locations: locations,
+          currentLocation: "chapel"
         });
+        console.log(locations);
       });
   }
+
+  getLocationById = id => {
+    return this.state.locations.filter(location => location.docId === id)[0];
+  };
+
+  getCurrentLocation = () => {
+    return this.getLocationById(this.state.currentLocation);
+  };
+
+  renderMonster = () => {
+    console.log("renderMonster start");
+    const currentLocation = this.getCurrentLocation();
+    if (currentLocation != null && currentLocation.monsterName !== "") {
+      console.log(currentLocation);
+      return (
+        <div className={styles.monsterSection}>
+          <Monster
+            description={currentLocation.monsterDescription}
+            name={currentLocation.monsterName}
+            combatexp={currentLocation.monsterCombatexp}
+            hp={currentLocation.monsterHp}
+            img={currentLocation.monsterImg}
+          ></Monster>
+        </div>
+      );
+    }
+    console.log("renderMonster no mons");
+  };
 
   render() {
     return (
@@ -48,18 +77,7 @@ class GameBoard extends Component {
           </section>
         </div>
 
-        <div className={styles.monsterSection}>
-          {this.state.monsters.map((monster, index) => (
-            <Monster
-              description={monster.description}
-              name={monster.name}
-              combatexp={monster.combatexp}
-              hp={monster.hp}
-              img={monster.img}
-              key={index}
-            ></Monster>
-          ))}
-        </div>
+        {this.renderMonster()}
         <section className={styles.directions}>
           <Button disabled={true} name={"Proceed inside"}></Button>
           <Button disabled={true} name={"Check the backyard"}></Button>
