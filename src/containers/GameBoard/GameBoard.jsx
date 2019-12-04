@@ -8,9 +8,7 @@ import Button from "../../components/Button";
 class GameBoard extends Component {
   state = {
     monsters: [],
-    playerhp: this.props.card.hp,
-    monstershp: [],
-    rathp: ""
+    monster: ""
   };
 
   componentDidMount() {
@@ -18,21 +16,14 @@ class GameBoard extends Component {
       .collection("monsters")
       .get()
       .then(querySnapshot => {
-        const monsters = querySnapshot.docs.map(doc => {
+        const monstersFromDatabase = querySnapshot.docs.map(doc => {
           return { ...doc.data(), docId: doc.id };
         });
         this.setState({
-          monsters: monsters,
-          monstershp: [...monsters.map(monster => monster.hp)]
+          monsters: monstersFromDatabase
         });
       });
   }
-
-  attackCycle = () => {
-    this.setState({ rathp: this.state.monstershp[0] });
-    // this.playerAttack();
-    // this.monsterAttack();
-  };
 
   render() {
     return (
@@ -58,13 +49,13 @@ class GameBoard extends Component {
         </div>
 
         <div className={styles.monsterSection}>
-          {this.state.monsters.map((monsters, index) => (
+          {this.state.monsters.map((monster, index) => (
             <Monster
-              description={monsters.description}
-              name={monsters.name}
-              combatexp={monsters.combatexp}
-              hp={monsters.hp}
-              img={monsters.img}
+              description={monster.description}
+              name={monster.name}
+              combatexp={monster.combatexp}
+              hp={monster.hp}
+              img={monster.img}
               key={index}
             ></Monster>
           ))}
